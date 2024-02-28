@@ -25,3 +25,25 @@ module.exports.deleteToDo=(req,res)=>{
         res.send({error:err,msg:"something went wrong!"});
     });
 };
+module.exports.updateToDo = async (req, res) => {
+  const { id } = req.params;
+  const { toDo, email } = req.body;
+
+  try {
+    const updatedToDo = await ToDoModel.findByIdAndUpdate(
+      id,
+      { toDo, email },
+      { new: true }
+    );
+
+    if (!updatedToDo) {
+      return res.status(404).send({ msg: "ToDo not found" });
+    }
+
+    console.log("Updated...");
+    res.send(updatedToDo);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: error, msg: "Something went wrong!" });
+  }
+};
