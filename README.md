@@ -28,6 +28,7 @@ Clone the repository:
 Install dependencies :
 
 ```bash
+  cd project
   npm install
 ``` 
 Run the server :
